@@ -119,10 +119,9 @@ def search(keyword: str, number: int = 50):
     results = []
     while number > 0:
         r = parse_results(
-            get_search_html(keyword, number if number <= 100 else 100,
+            get_search_html(keyword, number + 5 if number + 5 <= 100 else 100,
                             len(results)))
         number -= len(r)
-        print(number)
         results.extend(r)
     return results
 
@@ -130,6 +129,8 @@ def search(keyword: str, number: int = 50):
 if __name__ == '__main__':
     results = search('apple', 50)
     for r in results:
-        print(r.title)
+        print('===============================================================')
+        print(r.title, r.link)
+        print(r.desc)
 
     print('\n' + str(len(results)) + ' results returned.')
